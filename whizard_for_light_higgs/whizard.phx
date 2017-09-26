@@ -1,0 +1,51 @@
+ !------------------------------------------------------------------------
+ ! Automatically generated phase space configuration
+ ! Process e1e1h_o:
+ !    e a-e ->   e a-e   H
+ !   16   8 ->   1   2   4
+process e1e1h_o
+
+ ! Multiplicity = 2,  1 resonance,    0 logs,  s-channel graph
+ grove #  1
+ tree   3   7       !    3*  Z gamma
+   map   3 s-channel  Z
+
+ ! Multiplicity = 3, no resonances,   1 logs,   2 t-channel lines
+ grove #  2
+ tree  10  14       !    3*  gamma Z
+   map  10 u-channel  gamma
+
+ ! Multiplicity = 3, no resonances,   1 logs,  s-channel graph
+ grove #  3
+ tree   3   7       !    3*  gamma Z
+   map   3 infrared   gamma
+
+ ! Number of channels total:              3
+ ! Number of channels kept:               3
+ ! Number of dominant channels:           1
+
+ ! Dummy entry
+process e1e1h_o
+ !------------------------------------------------------------------------
+ ! Automatically generated phase space configuration
+ ! Process e2e2h_o:
+ !    e a-e ->  mu a-mu   H
+ !   16   8 ->   1    2   4
+process e2e2h_o
+
+ ! Multiplicity = 2,  1 resonance,    0 logs,  s-channel graph
+ grove #  1
+ tree   3   7       !    3*  Z gamma
+   map   3 s-channel  Z
+
+ ! Multiplicity = 3, no resonances,   1 logs,  s-channel graph
+ grove #  2
+ tree   3   7       !    3*  gamma Z
+   map   3 infrared   gamma
+
+ ! Number of channels total:              2
+ ! Number of channels kept:               2
+ ! Number of dominant channels:           1
+
+ ! Dummy entry
+process e2e2h_o

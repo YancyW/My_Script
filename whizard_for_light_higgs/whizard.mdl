@@ -1,0 +1,628 @@
+########################################################################
+# Standard Model with trivial CKM matrix (CompHEP: Feynman gauge)
+
+# Independent parameters
+parameter GF     1.16639E-5   # Fermi constant
+parameter mZ     91.1882      # Z-boson mass  
+parameter mW     80.419       # W-boson mass  
+parameter mH     200          # Higgs mass
+parameter alphas 0.1178       # Strong coupling constant (Z point)             
+parameter me     0.000511     # electron mass                       
+parameter mmu    0.1057       # muon mass                         
+parameter mtau   1.777        # tau-lepton mass                               
+parameter ms     0.12         # s-quark mass                         
+parameter mc     1.25         # c-quark mass                         
+parameter mb     4.2          # b-quark mass                         
+parameter mtop   174          # t-quark mass                         
+parameter wtop   1.523        # t-quark width
+parameter wZ     2.443        # Z-boson width
+parameter wW     2.049        # W-boson width
+parameter wH     1.419        # Higgs width  
+# Here are the values from PDG 2006
+parameter vckm11 0.97383      # Vud
+parameter vckm12 0.2272       # Vus
+parameter vckm13 0.00396      # Vub
+parameter vckm21 -0.2271      # Vcd
+parameter vckm22 0.97296      # Vcs
+parameter vckm23 0.04221      # Vcb
+parameter vckm31 0.00814      # Vtd
+parameter vckm32 -0.04161     # Vts
+parameter vckm33 0.99910      # Vtb
+parameter khgaz  1.000	      # anomaly Higgs couplings K factors
+parameter khgaga 1.000	      # anomaly Higgs couplings K factors
+parameter khgg 	 1.000	      # anomaly Higgs couplings K factors
+
+
+# Dependent parameters
+derived v     1/Sqrt(Sqrt2*GF)              # v (Higgs vev)
+derived cw    mW/mZ                         # cos(theta-W)
+derived sw    Sqrt(1-cw**2)                 # sin(theta-W)
+derived ee    2*sw*mW*Sqrt(Sqrt2*GF)        # em-coupling (GF scheme)
+derived ez    ee/(sw*cw)
+derived ey    ee*(sw/cw)
+derived aQED  ee**2/(4*3.1415926536)        # alpha_QED
+derived aQEDi 1/aQED                        # alpha_QED inverse
+derived sw2   sw*sw                         # sin^2(theta-W)
+
+########################################################################
+# Particle content
+
+# The quarks
+particle D_QUARK 1  parton
+  spin 1/2,  isospin -1/2,  charge -1/3,  color 3
+  name d, down
+  anti chep:D, omega:dbar, mad:d~, tex:"\bar{d}"
+particle U_QUARK 2  parton
+  spin 1/2,  isospin  1/2,  charge  2/3,  color 3
+  name u, up
+  anti chep:U, omega:ubar, mad:u~, tex:"\bar{u}"
+particle S_QUARK 3  like D_QUARK
+  name s, strange
+  anti chep:S, omega:sbar, mad:s~, tex:"\bar{s}"
+  mass ms
+particle C_QUARK 4  like U_QUARK
+  name c, charm
+  anti chep:C, omega:cbar, mad:c~, tex:"\bar{c}"
+  mass mc
+particle B_QUARK 5  like D_QUARK
+  name b, bottom
+  anti chep:B, omega:bbar, mad:b~, tex:"\bar{b}"
+  mass mb
+particle T_QUARK 6  like U_QUARK
+  name t, top
+  anti chep:T, omega:tbar, mad:t~, tex:"\bar{t}"
+  mass mtop,  width wtop
+
+# The leptons
+particle E_LEPTON 11
+  spin 1/2,  isospin -1/2,  charge  -1
+  name e, mad:omega:e-, chep:e1, electron, tex:e^-
+  anti    mad:omega:e+, chep:E1, positron, tex:e^+
+  mass me
+particle E_NEUTRINO 12 left
+  spin 1/2,  isospin  1/2
+  name nu_e, omega:nue,    chep:n1, mad:ve,  e-neutrino, tex:\nu_e
+  anti       omega:nuebar, chep:N1, mad:ve~,             tex:\bar\nu_e
+particle MU_LEPTON 13  like E_LEPTON
+  name mu, mad:omega:mu-, chep:e2, muon, tex:\mu^-
+  anti     mad:omega:mu+, chep:E2,       tex:\mu^+
+  mass mmu
+particle MU_NEUTRINO 14  like E_NEUTRINO
+  name nu_mu, omega:numu,    chep:n2, mad:vm,  mu-neutrino, tex:\nu_\mu
+  anti        omega:numubar, chep:N2, mad:vm~,              tex:\bar\nu_\mu
+particle TAU_LEPTON 15  like E_LEPTON
+  name tau, omega:tau-, chep:e3, mad:ta-, tauon, tex:\tau^-
+  anti      omega:tau+, chep:E3, mad:ta+,        tex:\tau^+
+  mass mtau
+particle TAU_NEUTRINO 16  like E_NEUTRINO
+  name nu_tau, omega:nutau,    chep:n3, mad:vt,  tau_neutrino, tex:\nu_\tau
+  anti         omega:nutaubar, chep:N3, mad:vt~,               tex:\bar\nu_\tau
+
+# The vector bosons
+particle GLUON 21  parton gauge
+  spin 1,  color 8
+  name g, omega: gl, chep:G, gluon
+particle PHOTON 22  gauge
+  spin 1
+  name gamma, omega:chep:mad:A, photon, tex:\gamma
+particle Z_BOSON 23  gauge
+  spin 1
+  name Z
+  mass mZ,  width wZ
+particle W_BOSON 24  gauge
+  spin 1,  charge 1
+  name W+, tex:W^+
+  anti omega:chep:mad:W-, tex:W^-
+  mass mW,  width wW
+
+# The Higgs
+particle HIGGS 25
+  spin 0
+  name H, h, Higgs
+  mass mH,  width wH
+
+
+########################################################################
+# Vertices of the Standard model
+# In graphs with identical structure, the first vertex is kept for phase space,
+# therefore, lighter particles come before heavier ones.
+
+# QED
+vertex D d A 
+      chep: { (-1/3)*ee 
+            | G(m3) }
+                        mad: { ee/3    | QED }
+vertex U u A 
+      chep: { (2/3)*ee 
+            | G(m3) }
+                        mad: { -ee*2/3 | QED }
+vertex S s A 
+      chep: { (-1/3)*ee 
+            | G(m3) }
+                        mad: { ee/3    | QED }
+vertex C c A 
+      chep: { (2/3)*ee 
+            | G(m3) }
+                        mad: { -ee*2/3 | QED }
+vertex B b A 
+      chep: { (-1/3)*ee 
+            | G(m3) }
+                        mad: { ee/3    | QED }
+vertex T t A 
+      chep: { (2/3)*ee 
+            | G(m3) }
+                        mad: { -ee*2/3 | QED }
+
+vertex E1 e1 A 
+      chep: { -ee 
+            | G(m3) }
+                        mad: { ee | QED }
+vertex E2 e2 A 
+      chep: { -ee 
+            | G(m3) }
+                        mad: { ee | QED }
+vertex E3 e3 A 
+      chep: { -ee 
+            | G(m3) }
+                        mad: { ee | QED }
+
+
+# QCD
+vertex G G G 
+      chep: { gg 
+            | m1.m2*(p1-p2).m3+m2.m3*(p2-p3).m1+m3.m1*(p3-p1).m2 }
+                        mad: { gg | QCD }
+vertex G G G G
+                        mad: { gg | QCD }
+vertex G G G.t 
+      chep: { gg/Sqrt2 
+            | m1.M3*m2.m3-m1.m3*m2.M3 }
+vertex G.C G.c G 
+      chep: { -gg 
+            | p1.m3 }
+
+vertex D d G 
+      chep: { gg 
+            | G(m3) }
+                        mad: { -gg | QCD }
+vertex U u G 
+      chep: { gg 
+            | G(m3) }
+                        mad: { -gg | QCD }
+vertex S s G 
+      chep: { gg 
+            | G(m3) }
+                        mad: { -gg | QCD }
+vertex C c G 
+      chep: { gg 
+            | G(m3) }
+                        mad: { -gg | QCD }
+vertex B b G 
+      chep: { gg 
+            | G(m3) }
+                        mad: { -gg | QCD }
+vertex T t G 
+      chep: { gg 
+            | G(m3) }
+                        mad: { -gg | QCD }
+
+
+# Neutral currents
+vertex D d Z 
+      chep: { -ee/(12*sw*cw) 
+            | +3*G(m3)*(1-G5)-4*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*(-1+2*sw2/3)/2,  -ey/3 /) | QFD } 
+vertex U u Z 
+      chep: { -ee/(12*sw*cw) 
+            | -3*G(m3)*(1-G5)+8*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*( 1-4*sw2/3)/2, ey*2/3 /) | QFD } 
+vertex S s Z 
+      chep: { -ee/(12*sw*cw) 
+            | +3*G(m3)*(1-G5)-4*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*(-1+2*sw2/3)/2,  -ey/3 /) | QFD } 
+vertex C c Z 
+      chep: { -ee/(12*sw*cw) 
+            | -3*G(m3)*(1-G5)+8*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*( 1-4*sw2/3)/2, ey*2/3 /) | QFD } 
+vertex B b Z 
+      chep: { -ee/(12*sw*cw) 
+            | +3*G(m3)*(1-G5)-4*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*(-1+2*sw2/3)/2,  -ey/3 /) | QFD } 
+vertex T t Z 
+      chep: { -ee/(12*sw*cw) 
+            | -3*G(m3)*(1-G5)+8*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*( 1-4*sw2/3)/2, ey*2/3 /) | QFD } 
+
+vertex E1 e1 Z 
+      chep: { -ee/(4*sw*cw) 
+            | G(m3)*(1-G5)-4*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*(-1+2*sw2)/2, -ey /) | QFD } 
+vertex E2 e2 Z 
+      chep: { -ee/(4*sw*cw) 
+            | G(m3)*(1-G5)-4*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*(-1+2*sw2)/2, -ey /) | QFD } 
+vertex E3 e3 Z 
+      chep: { -ee/(4*sw*cw) 
+            | G(m3)*(1-G5)-4*(sw^ 2)*G(m3) }
+                        mad: { (/ -ez*(-1+2*sw2)/2, -ey /) | QFD } 
+vertex N1 n1 Z 
+      chep: { ee/(4*sw*cw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ez/2, zero /) | QFD } 
+vertex N2 n2 Z 
+      chep: { ee/(4*sw*cw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ez/2, zero /) | QFD } 
+vertex N3 n3 Z 
+      chep: { ee/(4*sw*cw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ez/2, zero /) | QFD } 
+
+
+# Charged currents
+# For Comphep and Madgraph things do not work with this model!!!
+vertex U d W+ 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex C s W+ 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex T b W+ 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex D u W- 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex S c W- 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex B t W- 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+
+vertex N1 e1 W+ 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex N2 e2 W+ 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex N3 e3 W+ 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex E1 n1 W- 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex E2 n2 W- 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex E3 n3 W- 
+      chep: { ee/(2*Sqrt2*sw) 
+            | G(m3)*(1-G5) }
+                        mad: { (/ -ee/sqrt(2*sw2), zero /) | QFD }
+vertex U s W+ 
+vertex U b W+ 
+vertex C d W+ 
+vertex C b W+ 
+vertex T d W+ 
+vertex T s W+ 
+vertex S u W- 
+vertex B u W- 
+vertex D c W- 
+vertex B c W- 
+vertex D t W- 
+vertex S t W- 
+
+# Yukawa (neutral)
+vertex S s H 
+      chep: { -ee*ms/(2*mW*sw) }
+                        mad: { -ms/v   | QFD }
+vertex C c H 
+      chep: { -ee*mc/(2*mW*sw) }
+                        mad: { -mc/v   | QFD }
+vertex B b H 
+      chep: { -ee*mb/(2*mW*sw) }
+                        mad: { -mb/v   | QFD }
+vertex T t H 
+      chep: { -ee*mtop/(2*mW*sw) }
+                        mad: { -mtop/v | QFD }
+vertex E2 e2 H 
+      chep: { -ee*mmu/(2*mW*sw) }
+                        mad: { -mmu/v  | QFD }
+vertex E3 e3 H 
+      chep: { -ee*mtau/(2*mW*sw) }
+                        mad: { -mtau/v | QFD }
+
+vertex S s Z.f 
+      chep: { i*ee*ms/(2*mW*sw) 
+            | G5 }
+vertex C c Z.f 
+      chep: { -i*ee*mc/(2*mW*sw) 
+            | G5 }
+vertex B b Z.f 
+      chep: { i*ee*mb/(2*mW*sw) 
+            | G5 }
+vertex T t Z.f 
+      chep: { -i*ee*mtop/(2*mW*sw) 
+            | G5 }
+vertex E2 e2 Z.f 
+      chep: { i*ee*mmu/(2*mW*sw) 
+            | G5 }
+vertex E3 e3 Z.f 
+      chep: { i*ee*mtau/(2*mW*sw) 
+            | G5 }
+
+
+# Yukawa (charged)
+# No CKM mixing included for Goldstone boson vertices !!!
+vertex C s W+.f 
+      chep: { -i*ee/(2*Sqrt2*mW*sw) 
+            | ms*(1+G5)-mc*(1-G5) }
+vertex T b W+.f 
+      chep: { -i*ee/(2*Sqrt2*mW*sw) 
+            | mb*(1+G5)-mtop*(1-G5) }
+vertex S c W-.f 
+      chep: { -i*ee/(2*Sqrt2*mW*sw) 
+            | mc*(1+G5)-ms*(1-G5) }
+vertex B t W-.f 
+      chep: { -i*ee/(2*Sqrt2*mW*sw) 
+            | mtop*(1+G5)-mb*(1-G5) }
+
+vertex E2 n2 W-.f 
+      chep: { -i*ee*mmu/(2*Sqrt2*mW*sw) 
+            | -(1-G5) }
+vertex E3 n3 W-.f 
+      chep: { -i*ee*mtau/(2*Sqrt2*mW*sw) 
+            | -(1-G5) }
+vertex N2 e2 W+.f 
+      chep: { -i*ee*mmu/(2*Sqrt2*mW*sw) 
+            | (1+G5) }
+vertex N3 e3 W+.f 
+      chep: { -i*ee*mtau/(2*Sqrt2*mW*sw) 
+            | (1+G5) }
+
+
+# Vector-boson self-interactions
+vertex W+ W- A
+      chep: { -ee 
+            | m1.m2*(p1-p2).m3+m2.m3*(p2-p3).m1+m3.m1*(p3-p1).m2 }
+                        mad: { ee       | QFD }
+vertex W+ W- Z
+      chep: { -ee*cw/sw 
+            | m1.m2*(p1-p2).m3+m2.m3*(p2-p3).m1+m3.m1*(p3-p1).m2 }
+                        mad: { ee*cw/sw | QFD }
+
+vertex W+ W- Z Z
+      chep: { -(ee*cw/sw)**2 
+            | 2*m1.m2*m3.m4-m1.m3*m2.m4-m1.m4*m2.m3 }
+                        mad: { (ee*cw/sw)**2 | QFD }
+vertex W+ W+ W- W-
+      chep: { (ee/sw)**2 
+            | 2*m1.m2*m3.m4-m1.m3*m2.m4-m1.m4*m2.m3 }
+                        mad: { (ee/sw)**2    | QFD }
+vertex W+ W- Z A
+      chep: { -ee**2*cw/sw 
+            | 2*m1.m2*m3.m4-m1.m3*m2.m4-m1.m4*m2.m3 }
+                        mad: { ee**2*cw/sw   | QFD }
+vertex W+ W- A A
+      chep: { -ee**2 
+            | 2*m1.m2*m3.m4-m1.m3*m2.m4-m1.m4*m2.m3 }
+                        mad: { ee**2         | QFD }
+
+vertex W-.C Z.c W+ 
+      chep: { ee*cw/sw 
+            | p1.m3 }
+vertex W+.C Z.c W- 
+      chep: { -ee*cw/sw 
+            | p1.m3 }
+vertex Z.C W-.c W+ 
+      chep: { -ee*cw/sw 
+            | p1.m3 }
+vertex Z.C W+.c W- 
+      chep: { ee*cw/sw 
+            | p1.m3 }
+vertex W-.C W+.c Z 
+      chep: { -ee*cw/sw 
+            | p1.m3 }
+vertex W+.C W-.c Z 
+      chep: { ee*cw/sw 
+            | p1.m3 }
+vertex W-.C W+.c A 
+      chep: { -ee 
+            | p1.m3 }
+vertex W+.C W-.c A 
+      chep: { ee 
+            | p1.m3 }
+
+
+
+# Higgs - vector boson
+vertex H Z A
+vertex H A A
+vertex H g g 
+
+vertex H W+ W-
+      chep: { ee*mW/sw 
+            | m2.m3 }
+                        mad: { (ee/sw)**2*v/2    | QFD }
+vertex H Z Z
+      chep: { ee/(sw*cw**2)*mW 
+            | m2.m3 }
+                        mad: { (ee/sw/cw)**2*v/2 | QFD }
+vertex H H W+ W-
+      chep: {  (1/2)*(ee/sw)**2 
+            | m3.m4 }
+                        mad: { (ee/sw)**2/2      | QFD }
+vertex H H Z Z
+      chep: {  (1/2)*(ee/(sw*cw))**2 
+            | m3.m4 }
+                        mad: { (ee/sw/cw)**2/2   | QFD }
+
+vertex H Z.f Z 
+      chep: { i*ee/(2*cw*sw) 
+            | (p2-p1).m3 }
+vertex H W-.f W+ 
+      chep: { i*ee/(2*sw) 
+            | (p2-p1).m3 }
+vertex H W+.f W- 
+      chep: { i*ee/(2*sw) 
+            | (p2-p1).m3 }
+vertex Z.f W+.f W- 
+      chep: { ee/(2*sw) 
+            | -(p2-p1).m3 }
+vertex Z.f W-.f W+ 
+      chep: { ee/(2*sw) 
+            | (p2-p1).m3 }
+vertex W-.f W+.f Z 
+      chep: { ee/(2*cw*sw) 
+            | (1-2*sw^ 2)* (p2-p1).m3 }
+vertex W-.f W+.f A 
+      chep: { ee 
+            | (p2-p1).m3 }
+
+vertex W-.f W+ A 
+      chep: { -i*ee*mW 
+            | m2.m3 }
+vertex W+.f W- A 
+      chep: { -i*ee*mW 
+            | -m2.m3 }
+vertex W-.f W+ Z 
+      chep: { -i*ee*mW*sw/cw 
+            | -m2.m3 }
+vertex W+.f W- Z 
+      chep: { -i*ee*mW*sw/cw 
+            | m2.m3 }
+
+vertex W-.f W+.f A A
+      chep: { 2*ee**2 
+            | m3.m4 }
+vertex W-.f W+.f Z Z
+      chep: { (ee/(cw*sw))**2/2 
+            | (1-2*sw^ 2)^ 2*m3.m4 }
+vertex W-.f W+.f W- W+
+      chep: { ee**2/(2*sw*sw) 
+            | m3.m4 }
+vertex W-.f W+.f Z A
+      chep: { ee**2/(sw*cw) 
+            | (1-2*sw^ 2)*m3.m4 }
+vertex Z.f Z.f Z Z
+      chep: { (ee/(sw*cw))**2/2 
+            | m3.m4 }
+vertex Z.f Z.f W- W+
+      chep: { ee**2/(2*sw*sw) 
+            | m3.m4 }
+vertex W-.f Z.f W+ A
+      chep: { -ee**2/(2*sw) 
+            | m3.m4 }
+vertex W+.f Z.f W- A
+      chep: { -ee**2/(2*sw) 
+            | m3.m4 }
+vertex W-.f Z.f W+ Z
+      chep: { ee**2/(2*cw) 
+            | m3.m4 }
+vertex W+.f Z.f W- Z
+      chep: { ee**2/(2*cw) 
+            | m3.m4 }
+vertex W-.f H W+ A
+      chep: { -i*ee**2/(2*sw) 
+            | m3.m4 }
+vertex W+.f H W- A
+      chep: { i*ee**2/(2*sw) 
+            | m3.m4 }
+vertex W-.f H W+ Z
+      chep: { i*ee**2/(2*cw) 
+            | m3.m4 }
+vertex W+.f H W- Z
+      chep: { -i*ee**2/(2*cw) 
+            | m3.m4 }
+
+vertex Z.C Z.c H 
+      chep: { -ee*mW/(2*sw*cw*cw) }
+
+vertex W-.C W+.c H 
+      chep: { -ee*mW/(2*sw) }
+
+vertex W+.C W-.c H 
+      chep: { -ee*mW/(2*sw) }
+
+vertex W-.C W+.c Z.f 
+      chep: { i*ee*mW/(2*sw) }
+
+vertex W+.C W-.c Z.f 
+      chep: { -i*ee*mW/(2*sw) }
+
+vertex W-.C Z.c W+.f 
+      chep: { -i*ee*mW/(2*cw*sw) 
+            | 1-2*sw^ 2 }
+vertex W+.C Z.c W-.f 
+      chep: { i*ee*mW/(2*cw*sw) 
+            | 1-2*sw^ 2 }
+vertex Z.C W-.c W+.f 
+      chep: { i*ee*mW/(2*cw*sw) }
+
+vertex Z.C W+.c W-.f 
+      chep: { -i*ee*mW/(2*cw*sw) }
+
+vertex W-.C A.c W+ 
+      chep: { ee 
+            | p1.m3 }
+vertex W+.C A.c W- 
+      chep: { -ee 
+            | p1.m3 }
+vertex A.C W-.c W+ 
+      chep: { -ee 
+            | p1.m3 }
+vertex A.C W+.c W- 
+      chep: { ee 
+            | p1.m3 }
+vertex W-.C A.c W+.f 
+      chep: { -i*ee*mW }
+
+vertex W+.C A.c W-.f 
+      chep: { i*ee*mW }
+
+
+# Higgs self-interactions
+vertex H H H
+      chep: { -(3/2)*ee*mH**2/(mW*sw) }
+                        mad: { -3*mh**2/v        | QFD }
+
+vertex W+.f W-.f H 
+      chep: { -ee*mH**2/(2*mW*sw) }
+
+vertex Z.f Z.f H 
+      chep: { -ee*mH**2/(2*mW*sw) }
+
+
+vertex H H H H
+      chep: { (-3/4)*(ee*mH/(mW*sw))**2 }
+# mad: not implemented
+
+vertex Z.f Z.f Z.f Z.f
+      chep: { -3*(ee*mH/(2*mW*sw))**2 }
+
+vertex Z.f Z.f W-.f W+.f
+      chep: { -(ee*mH/(2*mW*sw))**2 }
+
+vertex W-.f W-.f W+.f W+.f
+      chep: { - (ee*mH/(mW*sw))**2/2 }
+
+vertex Z.f Z.f H H
+      chep: { -(ee*mH/(2*mW*sw))**2 }
+
+vertex W+.f W-.f H H
+      chep: { -(ee*mH/(2*mW*sw))**2 }
+
+
+
+

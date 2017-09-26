@@ -1,0 +1,359 @@
+ ! WHIZARD version 1.95 (Feb 25 2010)
+ ! Process library generated:
+ ! Thu Apr 13 09:37:59 CEST 2017 by ywang on 
+ ! GNU Fortran (GCC) 4.4.5 20110214 (Red Hat 4.4.5-6)
+ ! Floating-point numerics in @ precision
+ ! Matrix elements compiled in the WHIZARD executable:
+ ! Model: SM_CKM
+ ! Tag               Method  Options  Process
+ ! ffh_o           | omega  |       | e-,e+  -> u:d:s:c:b:e-:mu-:tau-:nue:numu:nutau,ubar:dbar:sbar:cbar:bbar:e+:mu+:tau+:nuebar:numubar:nutaubar,H
+ ! uuh_o           | omega  |       | e-,e+  -> u,ubar,H
+ ! ddh_o           | omega  |       | e-,e+  -> d,dbar,H
+ ! ssh_o           | omega  |       | e-,e+  -> s,sbar,H
+ ! cch_o           | omega  |       | e-,e+  -> c,cbar,H
+ ! bbh_o           | omega  |       | e-,e+  -> b,bbar,H
+ ! qqh_o           | omega  |       | e-,e+  -> u:d:s:c:b,ubar:dbar:sbar:cbar:bbar,H
+ ! e1e1h_o         | omega  |       | e-,e+  -> e-,e+,H
+ ! e2e2h_o         | omega  |       | e-,e+  -> mu-,mu+,H
+ ! e3e3h_o         | omega  |       | e-,e+  -> tau-,tau+,H
+ ! n1n1h_o         | omega  |       | e-,e+  -> nue,nuebar,H
+ ! n2n2h_o         | omega  |       | e-,e+  -> numu,numubar,H
+ ! n3n3h_o         | omega  |       | e-,e+  -> nutau,nutaubar,H
+ ! llh_o           | omega  |       | e-,e+  -> e-:mu-:tau-,e+:mu+:tau+,H
+ ! nnh_o           | omega  |       | e-,e+  -> nue:numu:nutau,nuebar:numubar:nutaubar,H
+ ! End of process list
+ ! For the process-specific logs, consult the file(s) whizard.XXX.out
+ ! Input data, including default values:
+ &process_input
+ process_id         = "e2e2h_o"
+ luminosity         = 1000.0    
+ polarized_beams    = T
+ structured_beams   = T
+ beam_recoil        = T
+ recoil_conserve_momentum = F
+ filename           = "whizard"
+ directory          = ""
+ input_file         = ""
+ input_slha_format  =  F
+ cm_frame           = T
+ sqrts              = 250.00    
+ /
+ &integration_input
+ calls =
+     1        10000
+    10        10000
+     1        50000
+ seed =      522345
+ reset_seed_each_process = F
+ accuracy_goal         = 0.0000    
+ efficiency_goal       = 100.00    
+ time_limit_adaptation =       10000
+ stratified            = T
+ use_efficiency        = F
+ weights_power         = .25000    
+ min_bins              =           3
+ max_bins              =          20
+ min_calls_per_bin     =          10
+ min_calls_per_channel =           0
+ write_grids           = T
+ write_grids_raw       = F
+ write_all_grids_file  = ""
+ write_all_grids       = F
+ write_grids_file      = ""
+ read_grids         = F
+ read_grids_raw     = F
+ read_grids_force      = T
+ read_grids_file       = ""
+ generate_phase_space   = T
+ read_model_file        = ""
+ write_phase_space_channels_file = ""
+ write_phase_space_file = ""
+ read_phase_space       = T
+ read_phase_space_file  = ""
+ phase_space_only       = F
+ use_equivalences   = T
+ azimuthal_dependence = F
+ off_shell_lines             =           1
+ extra_off_shell_lines       =           1
+ splitting_depth             =           1
+ exchange_lines              =           3
+ show_deleted_channels       = F
+ single_off_shell_decays     = T
+ double_off_shell_decays     = F
+ single_off_shell_branchings = T
+ double_off_shell_branchings = T
+ massive_fsr                 = T
+ threshold_mass     =  -10.000000000000000     
+ threshold_mass_t   =  -10.000000000000000     
+ default_jet_cut    =   10.000000000000000     
+ default_mass_cut   =   10.000000000000000     
+ default_energy_cut =   10.000000000000000     
+ default_q_cut      =   10.000000000000000     
+ write_default_cuts_file = ""
+ read_cuts_file          = ""
+ user_cut_mode      =           0
+ user_weight_mode   =           0
+ handle_negative_weight =           4
+ /
+ &simulation_input
+ n_events              =      10000
+ n_calls               =          0
+ n_events_warmup       =          0
+ unweighted            = T
+ normalize_weight      = T
+ write_weights         = F
+ write_weights_file    = ""
+ safety_factor         = 1.0000    
+ write_events_raw      = F
+ write_events_raw_file = ""
+ write_events          = T
+ write_events_format   =          20
+ write_events_file     = "E250-TDR_ws.Pe2e2h_mh10.Gwhizard-1_95.eL.pR.I250200"
+ events_per_file       =            0
+ bytes_per_file        =    500000000
+ min_file_count        =            1
+ max_file_count        =            5
+ read_events_raw       = F
+ read_events_raw_file  = ""
+ read_events           = F
+ read_events_force     = T
+ keep_beam_remnants    = T
+ keep_initials         = T
+ guess_color_flow      = F
+ recalculate           = F
+ shower                 = F
+ shower_nf              =           5
+ shower_running_alpha_s = F
+ shower_alpha_s         =  0.20000000000000001     
+ shower_lambda          =  0.28999999999999998     
+ shower_t_min          =   1.0000000000000000     
+ shower_md             =  0.33000000000000002     
+ shower_mu             =  0.33000000000000002     
+ shower_ms             =  0.50000000000000000     
+ shower_mc             =   1.5000000000000000     
+ shower_mb             =   4.7999999999999998     
+ fragment              = T
+ fragmentation_method  =           3
+ user_fragmentation_mode  =           0
+ pythia_processes  = ""
+ pythia_parameters = "PMAS(25,1)=10.0; PMAS(25,2)=0.0043;  MSTJ(41)=2; MSTU(22)=20; MSTJ(28)=2;  PARJ(21)=0.40000; PARJ(41)=0.11000; PARJ(42)=0.52000; PARJ(81)=0.25000;  PARJ(82)=1.90000; MSTJ(11)=3; PARJ(54)=-0.03100; PARJ(55)=-0.00200;  PARJ(1)=0.08500; PARJ(3)=0.45000; PARJ(4)=0.02500; PARJ(2)=0.31000;  PARJ(11)=0.60000; PARJ(12)=0.40000; PARJ(13)=0.72000; PARJ(14)=0.43000;  PARJ(15)=0.08000; PARJ(16)=0.08000; PARJ(17)=0.17000; MSTP(3)=1;  MWID(25)=2;  BRAT(212)=0.00044;BRAT(213)=0.0268;BRAT(214)=0.578;BRAT(219)=0.000221;  BRAT(220)=0.0637;BRAT(222)=0.0856;BRAT(223)=0.0023;BRAT(224)=0.00155;  BRAT(225)=0.0267;BRAT(226)=0.216"
+ /
+ &diagnostics_input
+ chattiness         =           5
+ catch_signals      = T
+ time_limit         =       10050
+ warn_empty_channel = F
+ screen_events      = F
+ screen_histograms  = T
+ screen_diagnostics = F
+ show_pythia_banner         = T
+ show_pythia_initialization = T
+ show_pythia_statistics     = T
+ write_logfile      = T
+ plot_history       = T
+ write_logfile_file = ""
+ show_input         = T
+ show_results       = T
+ show_phase_space   = F
+ show_cuts          = T
+ show_histories     = T
+ show_history       = T
+ show_weights       = T
+ show_event         = F
+ show_histograms    = T
+ show_overflow      = F
+ show_excess        = T
+ read_analysis_file = ""
+ plot_width         =         130
+ plot_height        =          90
+ plot_histograms    = T
+ plot_curves        = F
+ plot_symbols       = F
+ plot_smoothly      = F
+ plot_errors        = F
+ plot_excess        = T
+ plot_per_bin       = F
+ plot_grids_channels = ""
+ plot_grids_logscale =    10.000000000000000     
+ slha_rewrite_input =  T
+ slha_ignore_errors =  F
+ /
+ &parameter_input
+ gwidth   =  F
+ rwidth   =  F
+ GF =    1.1663900000000000E-005
+ mZ =    91.188199999999995     
+ mW =    80.418999999999997     
+ mH =    10.000000000000000     
+ alphas =   0.11780000000000000     
+ me =    0.0000000000000000     
+ mmu =    0.0000000000000000     
+ mtau =    1.7769999999999999     
+ ms =    0.0000000000000000     
+ mc =    0.0000000000000000     
+ mb =    0.0000000000000000     
+ mtop =    174.00000000000000     
+ wtop =    1.5229999999999999     
+ wZ =    2.4430000000000001     
+ wW =    2.0489999999999999     
+ wH =    4.3000000000000000E-003
+ vckm11 =   0.97382999999999997     
+ vckm12 =   0.22720000000000001     
+ vckm13 =    3.9600000000000000E-003
+ vckm21 =  -0.22710000000000000     
+ vckm22 =   0.97296000000000005     
+ vckm23 =    4.2209999999999998E-002
+ vckm31 =    8.1399999999999997E-003
+ vckm32 =   -4.1610000000000001E-002
+ vckm33 =   0.99909999999999999     
+ khgaz =    1.0000000000000000     
+ khgaga =    1.0000000000000000     
+ khgg =    1.0000000000000000     
+   v =    246.21845810181634     
+   cw =   0.88190138636358650     
+   sw =   0.47143392403388212     
+   ee =   0.30795615429614365     
+   ez =   0.74070969904532358     
+   ey =   0.16462268967378635     
+   aQED =    7.5468878994722211E-003
+   aQEDi =    132.50494949977107     
+   sw2 =   0.22224994472998413     
+ /
+ &beam_input
+ particle_name  = e1              
+ particle_code  =            0
+ energy         =    0.0000000000000000     
+ angle          =    0.0000000000000000     
+ direction      =    0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ vector_polarization =  F
+ polarization = 
+   1.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ FILE_events_on       =  F
+ FILE_events_file     = ""
+ FILE_events_energies =  T
+ USER_spectrum_on    =  T
+ USER_spectrum_sqrts =    0.0000000000000000     
+ USER_spectrum_mode  =           22
+ SCAN_spectrum_on    =  F
+ SCAN_spectrum_E0    =    0.0000000000000000     
+ SCAN_spectrum_E1    =    0.0000000000000000     
+ CIRCE_on       =  F
+ CIRCE_generate =  T
+ CIRCE_map      =  T
+ CIRCE_sqrts    =    0.0000000000000000     
+ CIRCE_ver      =            0
+ CIRCE_rev      =            0
+ CIRCE_acc      =            0
+ CIRCE_chat     =            0
+ CIRCE2_on        =  F
+ CIRCE2_generate  =  T
+ CIRCE2_verbose   =  T
+ CIRCE2_file      = ""
+ CIRCE2_design    = "*"
+ CIRCE2_polarized =  T
+ CIRCE2_map       =           -2
+ CIRCE2_power     =    2.0000000000000000     
+ ISR_on        =  T
+ ISR_alpha     =    7.2992999999999999E-003
+ ISR_m_in      =    5.1099999999999995E-004
+ ISR_Q_max     =    0.0000000000000000     
+ ISR_LLA_order =            3
+ ISR_map       =  T
+ EPA_on       =  F
+ EPA_map      =  T
+ EPA_alpha    =    7.2992999999999999E-003
+ EPA_m_in     =    5.1099999999999995E-004
+ EPA_mX       =    4.0000000000000000     
+ EPA_Q_max    =    4.0000000000000000     
+ EPA_x0       =    0.0000000000000000     
+ EPA_x1       =    0.0000000000000000     
+ PDF_on            =  F
+ PDF_ngroup        =            0
+ PDF_nset          =            0
+ PDF_nfl           =            0
+ PDF_lo            =            0
+ PDF_running_scale =  F
+ PDF_scale         =    0.0000000000000000     
+ PDF_QCDL4         =    0.0000000000000000     
+ PDF_power         =    2.0000000000000000     
+ LHAPDF_on         =  F
+ LHAPDF_file       = ""
+ LHAPDF_set        =            0
+ EWA_on       =  F
+ EWA_map      =  T
+ EWA_pT_max    =    0.0000000000000000     
+ EWA_x0       =    0.0000000000000000     
+ EWA_x1       =    0.0000000000000000     
+ USER_strfun_on    =  F
+ USER_strfun_sqrts =    0.0000000000000000     
+ USER_strfun_mode  =            0
+ /
+ &beam_input
+ particle_name  = E1              
+ particle_code  =            0
+ energy         =    0.0000000000000000     
+ angle          =    0.0000000000000000     
+ direction      =    0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ vector_polarization =  F
+ polarization = 
+   0.0000000000000000        1.0000000000000000        0.0000000000000000        0.0000000000000000        0.0000000000000000     
+ FILE_events_on       =  F
+ FILE_events_file     = ""
+ FILE_events_energies =  T
+ USER_spectrum_on    =  T
+ USER_spectrum_sqrts =    0.0000000000000000     
+ USER_spectrum_mode  =          -22
+ SCAN_spectrum_on    =  F
+ SCAN_spectrum_E0    =    0.0000000000000000     
+ SCAN_spectrum_E1    =    0.0000000000000000     
+ CIRCE_on       =  F
+ CIRCE_generate =  T
+ CIRCE_map      =  T
+ CIRCE_sqrts    =    0.0000000000000000     
+ CIRCE_ver      =            0
+ CIRCE_rev      =            0
+ CIRCE_acc      =            0
+ CIRCE_chat     =            0
+ CIRCE2_on        =  F
+ CIRCE2_generate  =  T
+ CIRCE2_verbose   =  T
+ CIRCE2_file      = ""
+ CIRCE2_design    = "*"
+ CIRCE2_polarized =  T
+ CIRCE2_map       =           -2
+ CIRCE2_power     =    2.0000000000000000     
+ ISR_on        =  T
+ ISR_alpha     =    7.2992999999999999E-003
+ ISR_m_in      =    5.1099999999999995E-004
+ ISR_Q_max     =    0.0000000000000000     
+ ISR_LLA_order =            3
+ ISR_map       =  T
+ EPA_on       =  F
+ EPA_map      =  T
+ EPA_alpha    =    7.2992999999999999E-003
+ EPA_m_in     =    5.1099999999999995E-004
+ EPA_mX       =    4.0000000000000000     
+ EPA_Q_max    =    4.0000000000000000     
+ EPA_x0       =    0.0000000000000000     
+ EPA_x1       =    0.0000000000000000     
+ PDF_on            =  F
+ PDF_ngroup        =            0
+ PDF_nset          =            0
+ PDF_nfl           =            0
+ PDF_lo            =            0
+ PDF_running_scale =  F
+ PDF_scale         =    0.0000000000000000     
+ PDF_QCDL4         =    0.0000000000000000     
+ PDF_power         =    2.0000000000000000     
+ LHAPDF_on         =  F
+ LHAPDF_file       = ""
+ LHAPDF_set        =            0
+ EWA_on       =  F
+ EWA_map      =  T
+ EWA_pT_max    =    0.0000000000000000     
+ EWA_x0       =    0.0000000000000000     
+ EWA_x1       =    0.0000000000000000     
+ USER_strfun_on    =  F
+ USER_strfun_sqrts =    0.0000000000000000     
+ USER_strfun_mode  =            0
+ /
